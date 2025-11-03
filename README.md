@@ -112,6 +112,96 @@ INSERT INTO product (product_name, price) VALUES ('Pants', 100);
 SELECT * FROM product;
 ```
 
+## Common PostgreSQL Table Operations
+
+Here are common SQL commands for managing table data:
+
+### Add (Insert) Data
+```sql
+-- Insert a single row
+INSERT INTO product (product_name, price) 
+VALUES ('T-shirt', 25);
+
+-- Insert multiple rows at once
+INSERT INTO product (product_name, price) 
+VALUES 
+  ('Hat', 15),
+  ('Shoes', 80),
+  ('Socks', 10);
+```
+
+### Update Data
+```sql
+-- Update a single record
+UPDATE product 
+SET price = 30 
+WHERE product_name = 'T-shirt';
+
+-- Update multiple records
+UPDATE product 
+SET price = price * 1.1 
+WHERE price < 50;
+```
+
+### Delete Data
+```sql
+-- Delete specific records
+DELETE FROM product 
+WHERE product_name = 'Socks';
+
+-- Delete all records matching a condition
+DELETE FROM product 
+WHERE price < 20;
+
+-- Delete all records from a table
+DELETE FROM product;
+-- Or alternatively (faster but be careful):
+TRUNCATE TABLE product;
+```
+
+### Query Data
+```sql
+-- Select all columns
+SELECT * FROM product;
+
+-- Select specific columns
+SELECT product_name, price FROM product;
+
+-- Filter with conditions
+SELECT * FROM product 
+WHERE price > 50;
+
+-- Sort results
+SELECT * FROM product 
+ORDER BY price DESC;
+
+-- Get unique values
+SELECT DISTINCT product_name 
+FROM product;
+
+-- Count records
+SELECT COUNT(*) 
+FROM product;
+```
+
+### Table Management
+```sql
+-- Add a new column
+ALTER TABLE product 
+ADD COLUMN description TEXT;
+
+-- Remove a column
+ALTER TABLE product 
+DROP COLUMN description;
+
+-- Rename a table
+ALTER TABLE product 
+RENAME TO inventory;
+
+-- Delete entire table
+DROP TABLE product;
+```
+
 ## Troubleshooting
 
 - If you cannot connect from the host to the container, ensure the container is listening on the forwarded port (check `docker ps` and `docker logs`).
