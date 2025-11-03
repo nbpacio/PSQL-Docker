@@ -15,7 +15,7 @@ Run a quick container for testing (this does NOT persist data across container r
 docker run --name my_postgres -e POSTGRES_USER=username -e POSTGRES_PASSWORD=password -e POSTGRES_DB=database_name -p 5432:5432 -d postgres
 ```
 
-Check it's running:
+Check if it's running:
 
 ```powershell
 docker ps
