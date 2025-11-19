@@ -55,7 +55,51 @@ docker run --name my_database \
   -d postgres
 ```
 
-Notes:
+## If Docker Container Exits:
+
+- If docker container exits, remove it first then run again:
+
+```bash
+docker rm my_postgres
+```
+
+- If port is already exists, check and stop the process:
+
+```bash
+lsof -i :5432
+docker stop <container_name>
+```
+
+- Check detailed logs:
+
+```bash
+docker logs -f my_postgres
+```
+
+## Delete PostgreSQL Data in Docker Volume
+
+Option 1: Remove the volume (cleanest)
+
+```bash
+docker volume rm pgdata
+```
+
+Option 2: Delete data while keeping the volume
+
+```bash
+docker stop my_postgres
+docker rm my_postgres
+docker volume rm pgdata
+```
+Then recreate the container with a fresh volume:
+
+Verify the volume is gone:
+
+```bash
+docker volume ls
+```
+## NOTES:
+
 - Mapping to Windows drives can run into permission or path translation issues. If possible, prefer Docker named volumes for reliability.
 - When using WSL2, mapping a WSL path or creating the data directory inside the WSL filesystem is often the most stable approach.
 
